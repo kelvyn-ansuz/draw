@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Bootstrap 5 Iframes</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+  </style>
+</head>
+<body class="vw-100 vh-100 overflow-hidden m-0 p-0">
+
+    <iframe src="<?php echo(base_url("desktop")); ?>" class="d-none d-lg-block w-100 h-100 border-0 d-block"></iframe>
+    <iframe src="<?php echo(base_url("mobile")); ?>" class="d-block d-lg-none w-100 h-100 border-0 d-block"></iframe>
+
+</body>
+
+</html>

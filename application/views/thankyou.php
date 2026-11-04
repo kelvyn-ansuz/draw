@@ -21,8 +21,6 @@
     .fixedWidth {
       max-width: 1080px;
       margin: auto;
-
-      background-image: url('footer.png');
       background-repeat: no-repeat;
       background-position: bottom center; /* Aligns it to the bottom and centers it */
       background-size: 100% auto;; /* Scales the image to fit nicely, or use 'cover' */
@@ -121,6 +119,10 @@
       color: #fff;
     }
 
+    a {
+      color: #c4d600;
+    }
+
 
 
   </style>
@@ -129,72 +131,15 @@
   <div class="fixedWidth d-flex flex-column justify-content-between">
 
     <div class="canvas-container">
-      <img src="header.png" class="img-fluid">
+      <img src="<?=base_url('assets/images/header.png')?>" class="img-fluid">
     </div>
 
     <!-- Drawing Board Workspace Wrapper -->
-    <div class="canvas-container pt-3 px-4">
-      <canvas id="paintCanvas" width="800" height="800"></canvas>
+    <div class=" mt-2 pt-3 px-4 text-center" style="font-size: 32px;">
+      <div>Thank you for your submission.</div>
+      <div class="py-3">Click <a class="text-decoration-none" href="<?=base_url('/')?>">here</a> if you wish to submit another drawing</div>
     </div>
 
-    <!-- Bottom Toolbar Styled with Bootstrap Grid and Utilities -->
-    <div class="toolbar-panel py-3 px-4 w-100 pb-5">
-      <div class="container-fluid toolbarCon">
-
-      <!-- Row 1: Brush Settings, Visual Size Indicator and Color Palette Grid -->
-      <div class="row align-items-center justify-content-center g-3 mb-3">
-        <div class="col-auto d-flex align-items-center gap-2">
-          <span class="fw-bold small text-secondary text-uppercase tracking-wider">Palette:</span>
-          <div id="colorPalette" class="d-flex gap-2">
-              <div class="color-swatch" style="background-color: #9dc32a;" data-color="#9dc32a"></div>
-              <div class="color-swatch" style="background-color: #d4e21f;" data-color="#d4e21f"></div>
-              <div class="color-swatch" style="background-color: #3f9920;" data-color="#3f9920"></div>
-              <div class="color-swatch" style="background-color: #8ad479;" data-color="#8ad479"></div>
-              <div class="color-swatch" style="background-color: #0a9951;" data-color="#0a9951"></div>
-              <div class="color-swatch" style="background-color: #00371d;" data-color="#00371d"></div>
-              <div class="color-swatch selected" style="background-color: #ffffff;" data-color="#ffffff"></div>
-          </div>
-        </div>
-
-        <div class="col-auto d-none d-sm-block">
-          <div class="vr-divider"></div>
-        </div>
-
-        <!-- Size Selection Group with Text Badge and Circle Preview Canvas Boundary -->
-        <div class="col-auto d-flex align-items-center gap-3">
-          <div class="d-flex align-items-center gap-2">
-            <label for="brushSize" class="form-label mb-0 small fw-bold text-secondary text-uppercase">Size:</label>
-            <input type="range" class="form-range" id="brushSize" min="1" max="50" value="8" style="width: 100px;">
-            <span id="sizeTextVal" class="badge bg-dark border border-secondary text-light font-monospace" style="min-width: 32px;">8px</span>
-          </div>
-
-          <!-- Visual Dynamic Circle Preview -->
-          <div id="sizeIndicatorCircle" title="Current Brush Preview">
-            <div id="sizeIndicatorPreview"></div>
-          </div>
-        </div>
-      </div>
-
-        <!-- Row 2: Drawing Modes & History Pipeline Controls -->
-        <div class="row align-items-center justify-content-center g-2">
-          <div class="col-auto d-flex gap-2">
-            <button id="drawBtn" class="btn btn-active d-flex"><i class="fa-solid fa-paintbrush"></i></button>
-            <button id="eraseBtn" class="btn btn-notactive d-flex"><i class="fa-solid fa-eraser"></i></button>
-          </div>
-
-          <div class="col-auto d-flex gap-2">
-            <button id="undoBtn" class="btn btn-notactive btn-dark" disabled><i class="fa-solid fa-rotate-left"></i></button>
-            <button id="redoBtn" class="btn btn-notactive btn-dark" disabled><i class="fa-solid fa-rotate-right"></i></button>
-            <button id="clearBtn" class="btn btn-notactive"><i class="fa-solid fa-trash"></i></button>
-          </div>
-
-          <div class="col-auto">
-            <button id="downloadBtn" class="btn btn-active d-flex align-items-center gap-1"><i class="fa-solid fa-upload"></i> Upload</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
 
   </div>
 
@@ -229,7 +174,7 @@
       const MAX_HISTORY = 20;
       let isSampleActive = true;
 
-      const SAMPLE_IMAGE_URL = 'sample.png';
+      const SAMPLE_IMAGE_URL = '<?=base_url('assets/images/sample.png')?>';
 
       function loadSampleImage() {
         ctx.clearRect(0, 0, canvasDOM.width, canvasDOM.height);
