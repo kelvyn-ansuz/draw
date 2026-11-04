@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="MobileOptimized" content="width">
     <meta name="HandheldFriendly" content="true">
-    <title>NMS 2026</title>
+    <title>Deloitte Year End Party 2026</title>
     <link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>">
     <link rel="stylesheet" href="<?php echo base_url("assets/css/all.min.css"); ?>">
     <link rel="stylesheet" href="<?php echo base_url("assets/css/main.css"); ?>">
@@ -35,7 +35,7 @@
         }
 
 
-        
+
     </style>
 </head>
 <body>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-md-1"></div>
             </div>
-                
+
 
 
 
@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10" style="padding-top:8px">
-                    
+
                     <div class="form-group row">
                         <div class="col-12">
                             <label for="firstName" class="col-form-label" style="padding-left: 15px; padding-right: 15px; font-size: 20px; font-weight: 600;">Your Thoughts*</label>
@@ -140,7 +140,7 @@
 
                     </div>
 
-                </div>                
+                </div>
 
             </div>
 
@@ -321,7 +321,7 @@
             resizeOnCanvas(file, 1280, $('#snap')[0]);
         }, 300);
         */
-    });    
+    });
 
     $(document).on('click', '#btn-submit', function(e) {
         e.preventDefault();
@@ -528,7 +528,7 @@
       context.drawImage(myImageData, 0, 0);
     }
 
-  });    
+  });
 
 
 </script>

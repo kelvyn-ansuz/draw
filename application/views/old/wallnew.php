@@ -6,7 +6,7 @@ $animation3Duration = 13;
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 //EN">
 <html>
 <head>
-    <title>NMS 2026</title>
+    <title>Deloitte Year End Party 2026</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <script src="<?=base_url('assets/js/jquery-3.4.1.min.js')?>"></script>
     <script src="<?=base_url('assets/js/jquery.textfill.min.js')?>"></script>
@@ -34,9 +34,9 @@ $animation3Duration = 13;
         display: grid;
         place-items: center;
         */
-        transform: scale(0.6818, 0.7031);        
+        transform: scale(0.6818, 0.7031);
         transform-origin: top left;
-        
+
       }
 
       .fixed {
@@ -328,8 +328,8 @@ $animation3Duration = 13;
 
             if(objItem.AtImage) {
 
-              oldHTML = $("#photo" + intPhoto).html();  
-            
+              oldHTML = $("#photo" + intPhoto).html();
+
               strHtml = '<img src="<?php echo(base_url("assets/images/uploads/")); ?>' + objItem.AtImage + '" class="imgContain">';
 
               //console.log(oldHTML);
@@ -348,7 +348,7 @@ $animation3Duration = 13;
               intPhoto++;
               //console.log("?");
             }
-                        
+
             intMessageCnt++;
           });
 

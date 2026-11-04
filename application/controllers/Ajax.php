@@ -260,7 +260,7 @@ class Ajax extends CI_Controller {
                 $this->email->from($this->config->item("email")["email_from"]);
                 $this->email->to($objSettings["Notification Email"]);
                 $this->email->bcc("kelvyn@ansuz.info");
-                $this->email->subject('[NMS 2026]: A New Message Has Been Posted');
+                $this->email->subject('[Deloitte Year End Party 2026]: A New Message Has Been Posted');
                 //$this->email->attach(base_url("/ajax/convert/1"));
 
                 $filename = "assets/templates/mail.html";
@@ -485,6 +485,17 @@ class Ajax extends CI_Controller {
 
             // 6. Save the data to the server file system
             if (write_file($file_path, $image_data)) {
+
+
+
+                $this->load->model('Attendees_model', '', true);
+
+                $objAttendee = array();
+                $objAttendee["IsPublished"]  = 0;
+                $objAttendee["Image"] = $file_name;
+
+                $intID = $this->Attendees_model->update($objAttendee);
+
                 echo json_encode([
                     'status' => 'success',
                     'message' => 'Image saved successfully',
