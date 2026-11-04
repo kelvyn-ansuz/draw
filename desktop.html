@@ -59,6 +59,7 @@
       background-color: #000;
       border: 3px solid #c4d600;
       border-radius: 15px;
+      max-width: 650px;
     }
 
     /* Style for the real-time brush circle badge indicator */
@@ -108,7 +109,7 @@
 </head>
 <body class="">
 
-<div class="container-fluid">
+<div class="container-fluid" style="max-width:1500px;">
   <!-- min-vh-100 forces the row to take up 100% of the viewport height -->
   <div class="row min-vh-100">
 
@@ -120,7 +121,7 @@
       <img src="left.png" class="img-fluid" style="max-height: 100vh; object-fit: contain;">
     </div>
 
-    <div class="col-md-6 d-flex flex-column justify-content-start align-items-center p-5 colRight">
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center p-5 colRight">
 
       <canvas id="paintCanvas" width="800" height="800"></canvas>
 
@@ -177,7 +178,7 @@
           </div>
 
           <div class="col-auto">
-            <button id="downloadBtn" class="btn btn-active d-flex align-items-center gap-1">💾 Upload</button>
+            <button id="downloadBtn" class="btn btn-active d-flex align-items-center gap-1"><i class="fa-solid fa-upload"></i> Upload</button>
           </div>
         </div>
 
