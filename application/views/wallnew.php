@@ -34,6 +34,7 @@ $animation3Duration = 13;
         width: 100%;
         height: 100%;
         background-color: #000;
+        z-index: 1;
       }
 
       .videoBG video {
@@ -43,6 +44,16 @@ $animation3Duration = 13;
         width: 100%;
         height: 100%;
         object-fit: fill;
+      }
+
+      .fixed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 50;
+        pointer-events: none;
       }
 
       .overlay {
@@ -55,22 +66,20 @@ $animation3Duration = 13;
         pointer-events: none;
       }
 
-    /* Outer Wrapper: Handles vertical placement and endless scrolling */
+    /* Outer Wrapper: Hardware-accelerated horizontal scroll */
     .paper-box {
       position: absolute;
       width: 150px;
       height: 150px;
       top: var(--top);
       left: 0;
-      filter:
-        drop-shadow(0px 2px 5px rgba(212,226,31, 0.45))
-        drop-shadow(0px 8px 18px rgba(212,226,31, 0.4))
-        drop-shadow(0px 16px 32px rgba(212,226,31, 0.2));
+      filter: drop-shadow(0px 8px 18px rgba(212,226,31, 0.35));
+      will-change: transform;
       animation: slideLeftToRight 20s infinite linear;
       animation-delay: var(--delay);
     }
 
-    /* Inner Sheet: Handles rotation and scaling */
+    /* Inner Sheet: Hardware-accelerated rotation and scaling */
     .sheet {
       width: 100%;
       height: 100%;
@@ -83,10 +92,12 @@ $animation3Duration = 13;
       border-radius: 8px;
       backface-visibility: hidden;
       -webkit-font-smoothing: antialiased;
+      will-change: transform;
+      transform: translateZ(0);
       animation: scaleAndRotate 6s infinite ease-in-out alternate;
     }
 
-    /* Staggered internal scaling animation speeds */
+    /* Staggered internal animation speeds */
     .paper-box:nth-child(3n+1) .sheet { animation-duration: 6s; }
     .paper-box:nth-child(3n+2) .sheet { animation-duration: 5.2s; animation-delay: -1.5s; }
     .paper-box:nth-child(3n+3) .sheet { animation-duration: 7s; animation-delay: -3s; }
@@ -103,23 +114,23 @@ $animation3Duration = 13;
     /* 1. Horizontal Motion Loop */
     @keyframes slideLeftToRight {
       0% {
-        transform: translateX(-200px);
+        transform: translate3d(-200px, 0, 0);
       }
       100% {
-        transform: translateX(calc(100vw + 200px));
+        transform: translate3d(calc(100vw + 200px), 0, 0);
       }
     }
 
-    /* 2. Internal Scaling and Rotation Effect */
+    /* 2. Rotation & Scaling: Starts at var(--rot), hits 0deg at 50%, then restores back */
     @keyframes scaleAndRotate {
       0% {
-        transform: rotate(var(--rot)) scale(1);
+        transform: rotate(var(--rot)) scale(1) translateZ(0);
       }
       50% {
-        transform: rotate(calc(var(--rot) + 12deg)) scale(1.25);
+        transform: rotate(0deg) scale(1.25) translateZ(0); /* Straights up to 0deg at midpoint */
       }
       100% {
-        transform: rotate(calc(var(--rot) - 10deg)) scale(0.85);
+        transform: rotate(var(--rot)) scale(0.85) translateZ(0); /* Restores back to original rotation */
       }
     }
     </style>
@@ -133,7 +144,6 @@ $animation3Duration = 13;
     </div>
     <div class="fixed">
 
-        <!-- All vertical positions kept safely between 20% and 85% (avoiding top 20% and bottom 10%) -->
         <div class="paper-box" style="--top: 22%; --rot: 14deg; --delay: 0s;">
           <div class="sheet"><img class="paper-image" src="" id="paper1"></div>
         </div>
