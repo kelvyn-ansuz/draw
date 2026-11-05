@@ -77,6 +77,7 @@ $animation3Duration = 13;
       will-change: transform;
       animation: randomFloat 18s infinite ease-in-out alternate;
       animation-delay: var(--delay);
+      perspective: 1000px; /* Enables 3D space depth */
     }
 
     /* Different float durations per variant for natural variety */
@@ -84,7 +85,7 @@ $animation3Duration = 13;
     .paper-box:nth-child(3n+2) { animation-duration: 16s; }
     .paper-box:nth-child(3n+3) { animation-duration: 22s; }
 
-    /* Inner Sheet: Hardware-accelerated rotation, scaling, and straightening to 0deg at 50% */
+    /* Inner Sheet: Hardware-accelerated 3D tumble, scaling, and straightening to flat (0,0,0) at 50% */
     .sheet {
       width: 100%;
       height: 100%;
@@ -98,8 +99,8 @@ $animation3Duration = 13;
       backface-visibility: hidden;
       -webkit-font-smoothing: antialiased;
       will-change: transform;
-      transform: translateZ(0);
-      animation: scaleAndRotate 7s infinite ease-in-out alternate;
+      transform-style: preserve-3d;
+      animation: scaleAndRotate3D 7s infinite ease-in-out alternate;
     }
 
     /* Staggered internal animation speeds */
@@ -135,16 +136,16 @@ $animation3Duration = 13;
       }
     }
 
-    /* 2. Rotation & Scaling: Starts at var(--rot), hits 0deg at 50%, restores back */
-    @keyframes scaleAndRotate {
+    /* 2. True 3D Rotation & Scaling Animation */
+    @keyframes scaleAndRotate3D {
       0% {
-        transform: rotate(var(--rot)) scale(1) translateZ(0);
+        transform: rotateX(var(--rotX)) rotateY(var(--rotY)) rotateZ(var(--rotZ)) scale(1) translateZ(0);
       }
       50% {
-        transform: rotate(0deg) scale(1.2) translateZ(0);
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1.2) translateZ(30px); /* Flattens out and pops forward in 3D space */
       }
       100% {
-        transform: rotate(var(--rot)) scale(0.85) translateZ(0);
+        transform: rotateX(calc(var(--rotX) * -1)) rotateY(calc(var(--rotY) * -1)) rotateZ(var(--rotZ)) scale(0.85) translateZ(-20px); /* Tumbles back */
       }
     }
     </style>
@@ -162,75 +163,75 @@ $animation3Duration = 13;
     </div>
 
     <div class="fixed">
-        <!-- 20 Papers positioned in a balanced middle-outer ring (shifted outward, top-left clear) -->
+        <!-- 20 Papers positioned in a balanced ring with unique 3D rotation angles (--rotX, --rotY, --rotZ) -->
 
         <!-- Top Area -->
-        <div class="paper-box" style="--top: 18%; --left: 35%; --rot: 14deg; --delay: 0s;">
+        <div class="paper-box" style="--top: 18%; --left: 35%; --rotX: 15deg; --rotY: 25deg; --rotZ: 14deg; --delay: 0s;">
           <div class="sheet"><img class="paper-image" src="" id="paper1"></div>
         </div>
-        <div class="paper-box" style="--top: 15%; --left: 50%; --rot: -8deg; --delay: -1s;">
+        <div class="paper-box" style="--top: 15%; --left: 50%; --rotX: -20deg; --rotY: 10deg; --rotZ: -8deg; --delay: -1s;">
           <div class="sheet"><img class="paper-image" src="" id="paper2"></div>
         </div>
-        <div class="paper-box" style="--top: 18%; --left: 65%; --rot: 22deg; --delay: -2s;">
+        <div class="paper-box" style="--top: 18%; --left: 65%; --rotX: 10deg; --rotY: -30deg; --rotZ: 22deg; --delay: -2s;">
           <div class="sheet"><img class="paper-image" src="" id="paper3"></div>
         </div>
-        <div class="paper-box" style="--top: 20%; --left: 78%; --rot: -15deg; --delay: -3s;">
+        <div class="paper-box" style="--top: 20%; --left: 78%; --rotX: -15deg; --rotY: -15deg; --rotZ: -15deg; --delay: -3s;">
           <div class="sheet"><img class="paper-image" src="" id="paper4"></div>
         </div>
 
         <!-- Right Side -->
-        <div class="paper-box" style="--top: 35%; --left: 84%; --rot: 8deg; --delay: -4s;">
+        <div class="paper-box" style="--top: 35%; --left: 84%; --rotX: 25deg; --rotY: 20deg; --rotZ: 8deg; --delay: -4s;">
           <div class="sheet"><img class="paper-image" src="" id="paper5"></div>
         </div>
-        <div class="paper-box" style="--top: 52%; --left: 86%; --rot: 35deg; --delay: -5s;">
+        <div class="paper-box" style="--top: 52%; --left: 86%; --rotX: -10deg; --rotY: 35deg; --rotZ: 35deg; --delay: -5s;">
           <div class="sheet"><img class="paper-image" src="" id="paper6"></div>
         </div>
-        <div class="paper-box" style="--top: 70%; --left: 82%; --rot: -11deg; --delay: -6s;">
+        <div class="paper-box" style="--top: 70%; --left: 82%; --rotX: 30deg; --rotY: -20deg; --rotZ: -11deg; --delay: -6s;">
           <div class="sheet"><img class="paper-image" src="" id="paper7"></div>
         </div>
 
         <!-- Bottom Area -->
-        <div class="paper-box" style="--top: 80%; --left: 72%; --rot: 19deg; --delay: -7s;">
+        <div class="paper-box" style="--top: 80%; --left: 72%; --rotX: -25deg; --rotY: -10deg; --rotZ: 19deg; --delay: -7s;">
           <div class="sheet"><img class="paper-image" src="" id="paper8"></div>
         </div>
-        <div class="paper-box" style="--top: 82%; --left: 56%; --rot: -5deg; --delay: -8s;">
+        <div class="paper-box" style="--top: 82%; --left: 56%; --rotX: 15deg; --rotY: 25deg; --rotZ: -5deg; --delay: -8s;">
           <div class="sheet"><img class="paper-image" src="" id="paper9"></div>
         </div>
-        <div class="paper-box" style="--top: 80%; --left: 40%; --rot: 27deg; --delay: -9s;">
+        <div class="paper-box" style="--top: 80%; --left: 40%; --rotX: -10deg; --rotY: -25deg; --rotZ: 27deg; --delay: -9s;">
           <div class="sheet"><img class="paper-image" src="" id="paper10"></div>
         </div>
-        <div class="paper-box" style="--top: 82%; --left: 26%; --rot: -18deg; --delay: -10s;">
+        <div class="paper-box" style="--top: 82%; --left: 26%; --rotX: 20deg; --rotY: 15deg; --rotZ: -18deg; --delay: -10s;">
           <div class="sheet"><img class="paper-image" src="" id="paper11"></div>
         </div>
-        <div class="paper-box" style="--top: 78%; --left: 15%; --rot: 12deg; --delay: -11s;">
+        <div class="paper-box" style="--top: 78%; --left: 15%; --rotX: -30deg; --rotY: 30deg; --rotZ: 12deg; --delay: -11s;">
           <div class="sheet"><img class="paper-image" src="" id="paper12"></div>
         </div>
 
         <!-- Left Side (Lower down, keeping top-left clear) -->
-        <div class="paper-box" style="--top: 65%; --left: 12%; --rot: -31deg; --delay: -12s;">
+        <div class="paper-box" style="--top: 65%; --left: 12%; --rotX: 15deg; --rotY: -35deg; --rotZ: -31deg; --delay: -12s;">
           <div class="sheet"><img class="paper-image" src="" id="paper13"></div>
         </div>
-        <div class="paper-box" style="--top: 48%; --left: 12%; --rot: 42deg; --delay: -13s;">
+        <div class="paper-box" style="--top: 48%; --left: 12%; --rotX: -25deg; --rotY: -15deg; --rotZ: 42deg; --delay: -13s;">
           <div class="sheet"><img class="paper-image" src="" id="paper14"></div>
         </div>
-        <div class="paper-box" style="--top: 30%; --left: 15%; --rot: -9deg; --delay: -14s;">
+        <div class="paper-box" style="--top: 30%; --left: 15%; --rotX: 25deg; --rotY: 10deg; --rotZ: -9deg; --delay: -14s;">
           <div class="sheet"><img class="paper-image" src="" id="paper15"></div>
         </div>
 
         <!-- Mid-Outer Ring Fillers -->
-        <div class="paper-box" style="--top: 26%; --left: 26%; --rot: 16deg; --delay: -15s;">
+        <div class="paper-box" style="--top: 26%; --left: 26%; --rotX: -15deg; --rotY: 20deg; --rotZ: 16deg; --delay: -15s;">
           <div class="sheet"><img class="paper-image" src="" id="paper16"></div>
         </div>
-        <div class="paper-box" style="--top: 26%; --left: 74%; --rot: -24deg; --delay: -16s;">
+        <div class="paper-box" style="--top: 26%; --left: 74%; --rotX: 20deg; --rotY: -25deg; --rotZ: -24deg; --delay: -16s;">
           <div class="sheet"><img class="paper-image" src="" id="paper17"></div>
         </div>
-        <div class="paper-box" style="--top: 72%; --left: 76%; --rot: 5deg; --delay: -17s;">
+        <div class="paper-box" style="--top: 72%; --left: 76%; --rotX: -10deg; --rotY: 15deg; --rotZ: 5deg; --delay: -17s;">
           <div class="sheet"><img class="paper-image" src="" id="paper18"></div>
         </div>
-        <div class="paper-box" style="--top: 72%; --left: 22%; --rot: -14deg; --delay: -18s;">
+        <div class="paper-box" style="--top: 72%; --left: 22%; --rotX: 30deg; --rotY: -10deg; --rotZ: -14deg; --delay: -18s;">
           <div class="sheet"><img class="paper-image" src="" id="paper19"></div>
         </div>
-        <div class="paper-box" style="--top: 45%; --left: 80%; --rot: 30deg; --delay: -19s;">
+        <div class="paper-box" style="--top: 45%; --left: 80%; --rotX: -20deg; --rotY: -30deg; --rotZ: 30deg; --delay: -19s;">
           <div class="sheet"><img class="paper-image" src="" id="paper20"></div>
         </div>
     </div>
