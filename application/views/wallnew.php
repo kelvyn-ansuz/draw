@@ -52,7 +52,7 @@ $animation3Duration = 13;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 50;
+        z-index: 150;
         pointer-events: none;
       }
 
@@ -66,20 +66,25 @@ $animation3Duration = 13;
         pointer-events: none;
       }
 
-    /* Outer Wrapper: Hardware-accelerated horizontal scroll */
+    /* Outer Wrapper: Hardware-accelerated organic random floating motion */
     .paper-box {
       position: absolute;
       width: 150px;
       height: 150px;
       top: var(--top);
-      left: 0;
+      left: var(--left);
       filter: drop-shadow(0px 8px 18px rgba(212,226,31, 0.35));
       will-change: transform;
-      animation: slideLeftToRight 20s infinite linear;
+      animation: randomFloat 18s infinite ease-in-out alternate;
       animation-delay: var(--delay);
     }
 
-    /* Inner Sheet: Hardware-accelerated rotation and scaling */
+    /* Different float durations per variant for natural variety */
+    .paper-box:nth-child(3n+1) { animation-duration: 20s; }
+    .paper-box:nth-child(3n+2) { animation-duration: 16s; }
+    .paper-box:nth-child(3n+3) { animation-duration: 22s; }
+
+    /* Inner Sheet: Hardware-accelerated rotation, scaling, and straightening to 0deg at 50% */
     .sheet {
       width: 100%;
       height: 100%;
@@ -94,13 +99,13 @@ $animation3Duration = 13;
       -webkit-font-smoothing: antialiased;
       will-change: transform;
       transform: translateZ(0);
-      animation: scaleAndRotate 6s infinite ease-in-out alternate;
+      animation: scaleAndRotate 7s infinite ease-in-out alternate;
     }
 
     /* Staggered internal animation speeds */
-    .paper-box:nth-child(3n+1) .sheet { animation-duration: 6s; }
-    .paper-box:nth-child(3n+2) .sheet { animation-duration: 5.2s; animation-delay: -1.5s; }
-    .paper-box:nth-child(3n+3) .sheet { animation-duration: 7s; animation-delay: -3s; }
+    .paper-box:nth-child(3n+1) .sheet { animation-duration: 6.5s; }
+    .paper-box:nth-child(3n+2) .sheet { animation-duration: 5.5s; animation-delay: -1.5s; }
+    .paper-box:nth-child(3n+3) .sheet { animation-duration: 7.5s; animation-delay: -3s; }
 
     /* Image Object */
     .paper-image {
@@ -111,26 +116,35 @@ $animation3Duration = 13;
       user-select: none;
     }
 
-    /* 1. Horizontal Motion Loop */
-    @keyframes slideLeftToRight {
+    /* 1. Organic Random Multi-Directional Float */
+    @keyframes randomFloat {
       0% {
-        transform: translate3d(-200px, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      25% {
+        transform: translate3d(30px, -20px, 0);
+      }
+      50% {
+        transform: translate3d(-30px, 30px, 0);
+      }
+      75% {
+        transform: translate3d(25px, 20px, 0);
       }
       100% {
-        transform: translate3d(calc(100vw + 200px), 0, 0);
+        transform: translate3d(-25px, -25px, 0);
       }
     }
 
-    /* 2. Rotation & Scaling: Starts at var(--rot), hits 0deg at 50%, then restores back */
+    /* 2. Rotation & Scaling: Starts at var(--rot), hits 0deg at 50%, restores back */
     @keyframes scaleAndRotate {
       0% {
         transform: rotate(var(--rot)) scale(1) translateZ(0);
       }
       50% {
-        transform: rotate(0deg) scale(1.25) translateZ(0); /* Straights up to 0deg at midpoint */
+        transform: rotate(0deg) scale(1.2) translateZ(0);
       }
       100% {
-        transform: rotate(var(--rot)) scale(0.85) translateZ(0); /* Restores back to original rotation */
+        transform: rotate(var(--rot)) scale(0.85) translateZ(0);
       }
     }
     </style>
@@ -144,43 +158,49 @@ $animation3Duration = 13;
     </div>
     <div class="fixed">
 
-        <div class="paper-box" style="--top: 22%; --rot: 14deg; --delay: 0s;">
+        <!-- Perimeter Layout: Framed around screen edges, leaving top-left corner completely clear -->
+
+        <!-- Top Edge (Right side) -->
+        <div class="paper-box" style="--top: 6%; --left: 40%; --rot: 14deg; --delay: 0s;">
           <div class="sheet"><img class="paper-image" src="" id="paper1"></div>
         </div>
 
-        <div class="paper-box" style="--top: 55%; --rot: -8deg; --delay: -2s;">
+        <div class="paper-box" style="--top: 6%; --left: 72%; --rot: -8deg; --delay: -2s;">
           <div class="sheet"><img class="paper-image" src="" id="paper2"></div>
         </div>
 
-        <div class="paper-box" style="--top: 35%; --rot: 8deg; --delay: -4s;">
+        <!-- Right Edge -->
+        <div class="paper-box" style="--top: 22%; --left: 88%; --rot: 8deg; --delay: -4s;">
           <div class="sheet"><img class="paper-image" src="" id="paper3"></div>
         </div>
 
-        <div class="paper-box" style="--top: 72%; --rot: 35deg; --delay: -6s;">
+        <div class="paper-box" style="--top: 50%; --left: 88%; --rot: 35deg; --delay: -6s;">
           <div class="sheet"><img class="paper-image" src="" id="paper4"></div>
         </div>
 
-        <div class="paper-box" style="--top: 26%; --rot: -11deg; --delay: -8s;">
+        <div class="paper-box" style="--top: 78%; --left: 85%; --rot: -11deg; --delay: -8s;">
           <div class="sheet"><img class="paper-image" src="" id="paper5"></div>
         </div>
 
-        <div class="paper-box" style="--top: 64%; --rot: 19deg; --delay: -10s;">
+        <!-- Bottom Edge -->
+        <div class="paper-box" style="--top: 85%; --left: 60%; --rot: 19deg; --delay: -10s;">
           <div class="sheet"><img class="paper-image" src="" id="paper6"></div>
         </div>
 
-        <div class="paper-box" style="--top: 43%; --rot: -5deg; --delay: -12s;">
+        <div class="paper-box" style="--top: 85%; --left: 32%; --rot: -5deg; --delay: -12s;">
           <div class="sheet"><img class="paper-image" src="" id="paper7"></div>
         </div>
 
-        <div class="paper-box" style="--top: 79%; --rot: 27deg; --delay: -14s;">
+        <div class="paper-box" style="--top: 82%; --left: 10%; --rot: 27deg; --delay: -14s;">
           <div class="sheet"><img class="paper-image" src="" id="paper8"></div>
         </div>
 
-        <div class="paper-box" style="--top: 30%; --rot: -31deg; --delay: -16s;">
+        <!-- Left Edge (Lower down, avoiding top-left) -->
+        <div class="paper-box" style="--top: 55%; --left: 4%; --rot: -31deg; --delay: -16s;">
           <div class="sheet"><img class="paper-image" src="" id="paper9"></div>
         </div>
 
-        <div class="paper-box" style="--top: 50%; --rot: 42deg; --delay: -18s;">
+        <div class="paper-box" style="--top: 32%; --left: 5%; --rot: 42deg; --delay: -18s;">
           <div class="sheet"><img class="paper-image" src="" id="paper10"></div>
         </div>
 
