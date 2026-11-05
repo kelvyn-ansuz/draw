@@ -445,6 +445,12 @@
       });
 
       $downloadBtn.on('click', function() {
+
+        if(historyStack.length==0) {
+          alert("Please draw something first!");
+          return;
+        }
+
         const exportCanvas = document.createElement('canvas');
         exportCanvas.width = canvasDOM.width;
         exportCanvas.height = canvasDOM.height;
@@ -454,10 +460,32 @@
         exportCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
         exportCtx.drawImage(canvasDOM, 0, 0);
 
-        const downloadLink = document.createElement('a');
-        downloadLink.href = exportCanvas.toDataURL('image/png');
-        downloadLink.download = `canvas-drawing-${Date.now()}.png`;
-        downloadLink.click();
+        const dataURL = exportCanvas.toDataURL('image/png');
+
+        const formData = new FormData();
+        formData.append('image', dataURL);
+
+        $.ajax({
+          url: 'ajax/uploadImage/',
+          type: 'POST',
+          data: formData,
+          processData: false,  // Tell jQuery not to process the data
+          contentType: false,  // Tell jQuery not to set contentType header
+          dataType: 'json',
+          success: function(response) {
+            if (response.status) {
+              window.top.location.href  = "<?php echo base_url('/thankyou/'); ?>";
+            } else {
+              alert("nope!");
+
+            }
+          },
+          error: function(xhr, status, error) {
+            alert("Encounter an error. Please try to submit again.");
+          }
+        });
+
+
       });
     });
   </script>

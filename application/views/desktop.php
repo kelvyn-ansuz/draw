@@ -445,8 +445,6 @@
           return;
         }
 
-
-
         const exportCanvas = document.createElement('canvas');
         exportCanvas.width = canvasDOM.width;
         exportCanvas.height = canvasDOM.height;
