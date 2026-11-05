@@ -103,24 +103,25 @@ $animation3Duration = 13;
        ANIMATIONS & SCHEDULING: Custom loops with desynchronized timings
        ========================================================================== */
 
-    .paper-box:nth-child(3n+1) .sheet {
-      animation: straightenVariantA 5.5s infinite ease-in-out alternate;
+.paper-box:nth-child(3n+1) .sheet {
+      animation: morphVariantA 6s infinite ease-in-out alternate;
       animation-delay: var(--delay);
     }
 
     .paper-box:nth-child(3n+2) .sheet {
-      animation: straightenVariantB 6.8s infinite ease-in-out alternate;
+      animation: morphVariantB 7.5s infinite ease-in-out alternate;
       animation-delay: var(--delay);
     }
 
     .paper-box:nth-child(3n+3) .sheet {
-      animation: straightenVariantC 4.9s infinite ease-in-out alternate;
+      animation: morphVariantC 5.2s infinite ease-in-out alternate;
       animation-delay: var(--delay);
     }
 
-    /* VARIANT A */
-    @keyframes straightenVariantA {
+    /* VARIANT A: Transitions from custom --start-rot to 0deg */
+    @keyframes morphVariantA {
       0%, 20% {
+        transform: var(--start-rot);
         clip-path: polygon(
           0% 5%, 50% 0%, 100% 4%,
           96% 35%, 100% 65%, 95% 100%,
@@ -129,6 +130,7 @@ $animation3Duration = 13;
         );
       }
       80%, 100% {
+        transform: rotate(0deg);
         clip-path: polygon(
           0% 0%, 50% 0%, 100% 0%,
           100% 35%, 100% 65%, 100% 100%,
@@ -139,8 +141,9 @@ $animation3Duration = 13;
     }
 
     /* VARIANT B */
-    @keyframes straightenVariantB {
+    @keyframes morphVariantB {
       0%, 15% {
+        transform: var(--start-rot);
         clip-path: polygon(
           0% 2%, 50% 3%, 100% 1%,
           98% 25%, 100% 75%, 97% 100%,
@@ -149,6 +152,7 @@ $animation3Duration = 13;
         );
       }
       75%, 100% {
+        transform: rotate(0deg);
         clip-path: polygon(
           0% 0%, 50% 0%, 100% 0%,
           100% 25%, 100% 75%, 100% 100%,
@@ -159,8 +163,9 @@ $animation3Duration = 13;
     }
 
     /* VARIANT C */
-    @keyframes straightenVariantC {
+    @keyframes morphVariantC {
       0%, 30% {
+        transform: var(--start-rot);
         clip-path: polygon(
           0% 0%, 50% 5%, 100% 0%,
           95% 30%, 100% 60%, 94% 100%,
@@ -169,6 +174,7 @@ $animation3Duration = 13;
         );
       }
       85%, 100% {
+        transform: rotate(0deg);
         clip-path: polygon(
           0% 0%, 50% 0%, 100% 0%,
           100% 30%, 100% 60%, 100% 100%,
@@ -177,7 +183,6 @@ $animation3Duration = 13;
         );
       }
     }
-
 
 
     </style>
@@ -191,50 +196,48 @@ $animation3Duration = 13;
     </div>
     <div class="fixed" id="fixed">
 
-
-
-        <div class="paper-box" style="--top: 30%;   --left: 6%; --rotation: rotate(14deg); --delay: -0.4s;">
+        <div class="paper-box" style="--top: 30%;   --left: 6%; --start-rot: rotate(14deg); --delay: -0.4s;">
           <div class="sheet"><img class="paper-image" src="" id="paper1"></div>
         </div>
 
-        <div class="paper-box" style="--top: 51%;   --left: 22%; --rotation: rotate(-8deg); --delay: -3.1s;">
+        <div class="paper-box" style="--top: 51%;   --left: 22%; --start-rot: rotate(-8deg); --delay: -3.1s;">
           <div class="sheet"><img class="paper-image" src="" id="paper2"></div>
         </div>
 
 
 
-        <div class="paper-box" style="--top: 8%; --left: 28%; --rotation: rotate(8deg); --delay: -3.1s;">
+        <div class="paper-box" style="--top: 8%; --left: 28%; --start-rot: rotate(8deg); --delay: -3.1s;">
           <div class="sheet"><img class="paper-image" src="" id="paper3"></div>
         </div>
 
-        <div class="paper-box" style="--top: 78%; --left: 3%; --rotation: rotate(35deg); --delay: -0.9s;">
+        <div class="paper-box" style="--top: 78%; --left: 3%; --start-rot: rotate(35deg); --delay: -0.9s;">
           <div class="sheet"><img class="paper-image" src="" id="paper4"></div>
         </div>
 
 
-        <div class="paper-box" style="--top: 8%; --left: 68%; --rotation: rotate(-11deg); --delay: -2.3s;">
+        <div class="paper-box" style="--top: 8%; --left: 68%; --start-rot: rotate(-11deg); --delay: -2.3s;">
           <div class="sheet"><img class="paper-image" src="" id="paper5"></div>
         </div>
 
-        <div class="paper-box" style="--top: 53%; --left: 72%; --rotation: rotate(19deg); --delay: -1.2s;">
+        <div class="paper-box" style="--top: 53%; --left: 72%; --start-rot: rotate(19deg); --delay: -1.2s;">
           <div class="sheet"><img class="paper-image" src="" id="paper6"></div>
         </div>
 
 
-        <div class="paper-box" style="--top: 76%; --left: 55%; --rotation: rotate(-5deg); --delay: -4.5s;">
+        <div class="paper-box" style="--top: 76%; --left: 55%; --start-rot: rotate(-5deg); --delay: -4.5s;">
           <div class="sheet"><img class="paper-image" src="" id="paper7"></div>
         </div>
 
-        <div class="paper-box" style="--top: 73%; --left: 32%; --rotation: rotate(27deg); --delay: -2.7s;">
+        <div class="paper-box" style="--top: 73%; --left: 32%; --start-rot: rotate(27deg); --delay: -2.7s;">
           <div class="sheet"><img class="paper-image" src="" id="paper8"></div>
         </div>
 
 
-        <div class="paper-box" style="--top: 79%; --left: 82%; --rotation: rotate(-31deg); --delay: -0.2s;">
+        <div class="paper-box" style="--top: 79%; --left: 82%; --start-rot: rotate(-31deg); --delay: -0.2s;">
           <div class="sheet"><img class="paper-image" src="" id="paper9"></div>
         </div>
 
-        <div class="paper-box" style="--top: 12%; --left: 88%; --rotation: rotate(42deg); --delay: -3.8s;">
+        <div class="paper-box" style="--top: 12%; --left: 88%; --start-rot: rotate(42deg); --delay: -3.8s;">
           <div class="sheet"><img class="paper-image" src="" id="paper10"></div>
         </div>
 
