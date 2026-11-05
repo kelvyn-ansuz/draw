@@ -1,7 +1,7 @@
 <?php
-$animation1Duration = 10;
-$animation2Duration = 11.2;
-$animation3Duration = 12;
+$animation1Duration = 5;
+$animation2Duration = 10;
+$animation3Duration = 13;
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 //EN">
 <html>
@@ -52,25 +52,29 @@ $animation3Duration = 12;
         width: 100%;
         height: 100%;
         z-index: 90;
+        pointer-events: none;
       }
 
+    /* Outer Wrapper: Handles vertical placement and endless scrolling */
     .paper-box {
       position: absolute;
       width: 150px;
       height: 150px;
       top: var(--top);
-      left: var(--left);
+      left: 0;
       filter:
         drop-shadow(0px 2px 5px rgba(212,226,31, 0.45))
         drop-shadow(0px 8px 18px rgba(212,226,31, 0.4))
         drop-shadow(0px 16px 32px rgba(212,226,31, 0.2));
+      animation: slideLeftToRight 20s infinite linear;
+      animation-delay: var(--delay);
     }
 
+    /* Inner Sheet: Handles rotation and scaling */
     .sheet {
       width: 100%;
       height: 100%;
       background: #000000;
-      transform: rotate(var(--rot));
       transform-origin: center;
       display: flex;
       justify-content: center;
@@ -79,8 +83,15 @@ $animation3Duration = 12;
       border-radius: 8px;
       backface-visibility: hidden;
       -webkit-font-smoothing: antialiased;
+      animation: scaleAndRotate 6s infinite ease-in-out alternate;
     }
 
+    /* Staggered internal scaling animation speeds */
+    .paper-box:nth-child(3n+1) .sheet { animation-duration: 6s; }
+    .paper-box:nth-child(3n+2) .sheet { animation-duration: 5.2s; animation-delay: -1.5s; }
+    .paper-box:nth-child(3n+3) .sheet { animation-duration: 7s; animation-delay: -3s; }
+
+    /* Image Object */
     .paper-image {
       width: 100%;
       height: 100%;
@@ -89,66 +100,26 @@ $animation3Duration = 12;
       user-select: none;
     }
 
-    .paper-box:nth-child(3n+1) .sheet {
-      animation: morphVariantA 12s infinite ease-in-out alternate;
-      animation-delay: var(--delay);
-    }
-
-    .paper-box:nth-child(3n+2) .sheet {
-      animation: morphVariantB 11.2s infinite ease-in-out alternate;
-      animation-delay: var(--delay);
-    }
-
-    .paper-box:nth-child(3n+3) .sheet {
-      animation: morphVariantC 10.4s infinite ease-in-out alternate;
-      animation-delay: var(--delay);
-    }
-
-    /* VARIANT A: Scaling reduced by 20% */
-    @keyframes morphVariantA {
+    /* 1. Horizontal Motion Loop */
+    @keyframes slideLeftToRight {
       0% {
-        transform: rotate(var(--rot)) translate(0px, 0px) scale(1);
+        transform: translateX(-200px);
       }
-      30% {
-        transform: rotate(calc(var(--rot) + 5deg)) translate(20px, -25px) scale(1.4);
-      }
-      60% {
-        transform: rotate(calc(var(--rot) - 7deg)) translate(-15px, 18px) scale(0.84);
-      }
-      85%, 100% {
-        transform: rotate(0deg) translate(0px, 0px) scale(1);
+      100% {
+        transform: translateX(calc(100vw + 200px));
       }
     }
 
-    /* VARIANT B: Scaling reduced by 20% */
-    @keyframes morphVariantB {
+    /* 2. Internal Scaling and Rotation Effect */
+    @keyframes scaleAndRotate {
       0% {
-        transform: rotate(var(--rot)) translate(0px, 0px) scale(1);
+        transform: rotate(var(--rot)) scale(1);
       }
-      35% {
-        transform: rotate(calc(var(--rot) - 6deg)) translate(-25px, -15px) scale(0.80);
+      50% {
+        transform: rotate(calc(var(--rot) + 12deg)) scale(1.25);
       }
-      70% {
-        transform: rotate(calc(var(--rot) + 8deg)) translate(15px, 25px) scale(1.44);
-      }
-      85%, 100% {
-        transform: rotate(0deg) translate(0px, 0px) scale(1);
-      }
-    }
-
-    /* VARIANT C: Scaling reduced by 20% */
-    @keyframes morphVariantC {
-      0% {
-        transform: rotate(var(--rot)) translate(0px, 0px) scale(1);
-      }
-      25% {
-        transform: rotate(calc(var(--rot) + 10deg)) translate(18px, 20px) scale(1.36);
-      }
-      55% {
-        transform: rotate(calc(var(--rot) - 5deg)) translate(-20px, -18px) scale(0.84);
-      }
-      85%, 100% {
-        transform: rotate(0deg) translate(0px, 0px) scale(1);
+      100% {
+        transform: rotate(calc(var(--rot) - 10deg)) scale(0.85);
       }
     }
     </style>
@@ -162,43 +133,44 @@ $animation3Duration = 12;
     </div>
     <div class="fixed">
 
-        <div class="paper-box" style="--top: 30%; --left: 6%; --rot: 14deg; --delay: -0.4s;">
+        <!-- All vertical positions kept safely between 20% and 85% (avoiding top 20% and bottom 10%) -->
+        <div class="paper-box" style="--top: 22%; --rot: 14deg; --delay: 0s;">
           <div class="sheet"><img class="paper-image" src="" id="paper1"></div>
         </div>
 
-        <div class="paper-box" style="--top: 51%; --left: 22%; --rot: -8deg; --delay: -3.1s;">
+        <div class="paper-box" style="--top: 55%; --rot: -8deg; --delay: -2s;">
           <div class="sheet"><img class="paper-image" src="" id="paper2"></div>
         </div>
 
-        <div class="paper-box" style="--top: 8%; --left: 28%; --rot: 8deg; --delay: -3.1s;">
+        <div class="paper-box" style="--top: 35%; --rot: 8deg; --delay: -4s;">
           <div class="sheet"><img class="paper-image" src="" id="paper3"></div>
         </div>
 
-        <div class="paper-box" style="--top: 78%; --left: 3%; --rot: 35deg; --delay: -0.9s;">
+        <div class="paper-box" style="--top: 72%; --rot: 35deg; --delay: -6s;">
           <div class="sheet"><img class="paper-image" src="" id="paper4"></div>
         </div>
 
-        <div class="paper-box" style="--top: 8%; --left: 68%; --rot: -11deg; --delay: -2.3s;">
+        <div class="paper-box" style="--top: 26%; --rot: -11deg; --delay: -8s;">
           <div class="sheet"><img class="paper-image" src="" id="paper5"></div>
         </div>
 
-        <div class="paper-box" style="--top: 53%; --left: 72%; --rot: 19deg; --delay: -1.2s;">
+        <div class="paper-box" style="--top: 64%; --rot: 19deg; --delay: -10s;">
           <div class="sheet"><img class="paper-image" src="" id="paper6"></div>
         </div>
 
-        <div class="paper-box" style="--top: 76%; --left: 55%; --rot: -5deg; --delay: -4.5s;">
+        <div class="paper-box" style="--top: 43%; --rot: -5deg; --delay: -12s;">
           <div class="sheet"><img class="paper-image" src="" id="paper7"></div>
         </div>
 
-        <div class="paper-box" style="--top: 73%; --left: 32%; --rot: 27deg; --delay: -2.7s;">
+        <div class="paper-box" style="--top: 79%; --rot: 27deg; --delay: -14s;">
           <div class="sheet"><img class="paper-image" src="" id="paper8"></div>
         </div>
 
-        <div class="paper-box" style="--top: 79%; --left: 82%; --rot: -31deg; --delay: -0.2s;">
+        <div class="paper-box" style="--top: 30%; --rot: -31deg; --delay: -16s;">
           <div class="sheet"><img class="paper-image" src="" id="paper9"></div>
         </div>
 
-        <div class="paper-box" style="--top: 12%; --left: 88%; --rot: 42deg; --delay: -3.8s;">
+        <div class="paper-box" style="--top: 50%; --rot: 42deg; --delay: -18s;">
           <div class="sheet"><img class="paper-image" src="" id="paper10"></div>
         </div>
 
@@ -209,18 +181,6 @@ $animation3Duration = 12;
   </div>
 
   <script type="text/javascript">
-
-
-
-    for(i=1;i>=1-;i++) {
-
-          strURL = '<?php echo base_url("assets/images/sample.png"); ?>';
-
-        $("#paper" + i).css('background-image', 'url(" ' + strURL +  ' ")');
-
-
-    }
-
     function checkStatus() {
       $.getJSON("<?php echo(base_url("ajax/getAllTiles")); ?>", function (data) {
         if(data){
