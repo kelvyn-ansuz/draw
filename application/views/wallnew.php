@@ -117,7 +117,7 @@ $animation3Duration = 13;
       user-select: none;
     }
 
-    /* 1. Expanded Horizontal Drift (Swings left and right substantially wider) */
+    /* 1. Expanded Horizontal Drift */
     @keyframes randomFloat {
       0% {
         transform: translate3d(0, 0, 0);
@@ -186,32 +186,32 @@ $animation3Duration = 13;
         <div class="paper-box" style="--top: 52%; --left: 86%; --rotX: -10deg; --rotY: 35deg; --rotZ: 35deg; --delay: -5s;">
           <div class="sheet"><img class="paper-image" src="" id="paper6"></div>
         </div>
-        <div class="paper-box" style="--top: 70%; --left: 82%; --rotX: 30deg; --rotY: -20deg; --rotZ: -11deg; --delay: -6s;">
+        <div class="paper-box" style="--top: 60%; --left: 82%; --rotX: 30deg; --rotY: -20deg; --rotZ: -11deg; --delay: -6s;">
           <div class="sheet"><img class="paper-image" src="" id="paper7"></div>
         </div>
 
-        <!-- Bottom Area -->
-        <div class="paper-box" style="--top: 80%; --left: 72%; --rotX: -25deg; --rotY: -10deg; --rotZ: 19deg; --delay: -7s;">
+        <!-- Bottom Area (Shifted up by ~20%) -->
+        <div class="paper-box" style="--top: 64%; --left: 72%; --rotX: -25deg; --rotY: -10deg; --rotZ: 19deg; --delay: -7s;">
           <div class="sheet"><img class="paper-image" src="" id="paper8"></div>
         </div>
-        <div class="paper-box" style="--top: 82%; --left: 56%; --rotX: 15deg; --rotY: 25deg; --rotZ: -5deg; --delay: -8s;">
+        <div class="paper-box" style="--top: 66%; --left: 56%; --rotX: 15deg; --rotY: 25deg; --rotZ: -5deg; --delay: -8s;">
           <div class="sheet"><img class="paper-image" src="" id="paper9"></div>
         </div>
-        <div class="paper-box" style="--top: 80%; --left: 40%; --rotX: -10deg; --rotY: -25deg; --rotZ: 27deg; --delay: -9s;">
+        <div class="paper-box" style="--top: 64%; --left: 40%; --rotX: -10deg; --rotY: -25deg; --rotZ: 27deg; --delay: -9s;">
           <div class="sheet"><img class="paper-image" src="" id="paper10"></div>
         </div>
-        <div class="paper-box" style="--top: 82%; --left: 26%; --rotX: 20deg; --rotY: 15deg; --rotZ: -18deg; --delay: -10s;">
+        <div class="paper-box" style="--top: 66%; --left: 26%; --rotX: 20deg; --rotY: 15deg; --rotZ: -18deg; --delay: -10s;">
           <div class="sheet"><img class="paper-image" src="" id="paper11"></div>
         </div>
-        <div class="paper-box" style="--top: 78%; --left: 15%; --rotX: -30deg; --rotY: 30deg; --rotZ: 12deg; --delay: -11s;">
+        <div class="paper-box" style="--top: 62%; --left: 15%; --rotX: -30deg; --rotY: 30deg; --rotZ: 12deg; --delay: -11s;">
           <div class="sheet"><img class="paper-image" src="" id="paper12"></div>
         </div>
 
         <!-- Left Side (Lower down, keeping top-left clear) -->
-        <div class="paper-box" style="--top: 65%; --left: 12%; --rotX: 15deg; --rotY: -35deg; --rotZ: -31deg; --delay: -12s;">
+        <div class="paper-box" style="--top: 55%; --left: 12%; --rotX: 15deg; --rotY: -35deg; --rotZ: -31deg; --delay: -12s;">
           <div class="sheet"><img class="paper-image" src="" id="paper13"></div>
         </div>
-        <div class="paper-box" style="--top: 48%; --left: 12%; --rotX: -25deg; --rotY: -15deg; --rotZ: 42deg; --delay: -13s;">
+        <div class="paper-box" style="--top: 42%; --left: 12%; --rotX: -25deg; --rotY: -15deg; --rotZ: 42deg; --delay: -13s;">
           <div class="sheet"><img class="paper-image" src="" id="paper14"></div>
         </div>
         <div class="paper-box" style="--top: 30%; --left: 15%; --rotX: 25deg; --rotY: 10deg; --rotZ: -9deg; --delay: -14s;">
@@ -225,10 +225,10 @@ $animation3Duration = 13;
         <div class="paper-box" style="--top: 26%; --left: 74%; --rotX: 20deg; --rotY: -25deg; --rotZ: -24deg; --delay: -16s;">
           <div class="sheet"><img class="paper-image" src="" id="paper17"></div>
         </div>
-        <div class="paper-box" style="--top: 72%; --left: 76%; --rotX: -10deg; --rotY: 15deg; --rotZ: 5deg; --delay: -17s;">
+        <div class="paper-box" style="--top: 58%; --left: 76%; --rotX: -10deg; --rotY: 15deg; --rotZ: 5deg; --delay: -17s;">
           <div class="sheet"><img class="paper-image" src="" id="paper18"></div>
         </div>
-        <div class="paper-box" style="--top: 72%; --left: 22%; --rotX: 30deg; --rotY: -10deg; --rotZ: -14deg; --delay: -18s;">
+        <div class="paper-box" style="--top: 58%; --left: 22%; --rotX: 30deg; --rotY: -10deg; --rotZ: -14deg; --delay: -18s;">
           <div class="sheet"><img class="paper-image" src="" id="paper19"></div>
         </div>
         <div class="paper-box" style="--top: 45%; --left: 80%; --rotX: -20deg; --rotY: -30deg; --rotZ: 30deg; --delay: -19s;">
