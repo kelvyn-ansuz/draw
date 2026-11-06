@@ -66,7 +66,7 @@ $animation3Duration = 13;
         pointer-events: none;
       }
 
-    /* Outer Wrapper: 60% size (90px x 90px) with hardware-accelerated floating motion */
+    /* Outer Wrapper: 60% size (90px x 90px) with extended horizontal floating range */
     .paper-box {
       position: absolute;
       width: 90px;
@@ -77,15 +77,15 @@ $animation3Duration = 13;
       will-change: transform;
       animation: randomFloat 18s infinite ease-in-out alternate;
       animation-delay: var(--delay);
-      perspective: 1000px; /* Enables 3D space depth */
+      perspective: 1000px;
     }
 
-    /* Different float durations per variant for natural variety */
+    /* Varying float speeds for natural asynchronous motion */
     .paper-box:nth-child(3n+1) { animation-duration: 20s; }
     .paper-box:nth-child(3n+2) { animation-duration: 16s; }
     .paper-box:nth-child(3n+3) { animation-duration: 22s; }
 
-    /* Inner Sheet: Hardware-accelerated 3D tumble, scaling, and straightening to flat (0,0,0) at 50% */
+    /* Inner Sheet: 3D rotation and scaling */
     .sheet {
       width: 100%;
       height: 100%;
@@ -117,35 +117,35 @@ $animation3Duration = 13;
       user-select: none;
     }
 
-    /* 1. Organic Random Multi-Directional Float */
+    /* 1. Expanded Horizontal Drift (Swings left and right substantially wider) */
     @keyframes randomFloat {
       0% {
         transform: translate3d(0, 0, 0);
       }
       25% {
-        transform: translate3d(25px, -15px, 0);
+        transform: translate3d(110px, -20px, 0);
       }
       50% {
-        transform: translate3d(-25px, 25px, 0);
+        transform: translate3d(-120px, 25px, 0);
       }
       75% {
-        transform: translate3d(20px, 15px, 0);
+        transform: translate3d(95px, -15px, 0);
       }
       100% {
-        transform: translate3d(-20px, -20px, 0);
+        transform: translate3d(-105px, 20px, 0);
       }
     }
 
-    /* 2. True 3D Rotation & Scaling Animation */
+    /* 2. 3D Rotation & Scaling Animation */
     @keyframes scaleAndRotate3D {
       0% {
         transform: rotateX(var(--rotX)) rotateY(var(--rotY)) rotateZ(var(--rotZ)) scale(1) translateZ(0);
       }
       50% {
-        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1.2) translateZ(30px); /* Flattens out and pops forward in 3D space */
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1.2) translateZ(30px);
       }
       100% {
-        transform: rotateX(calc(var(--rotX) * -1)) rotateY(calc(var(--rotY) * -1)) rotateZ(var(--rotZ)) scale(0.85) translateZ(-20px); /* Tumbles back */
+        transform: rotateX(calc(var(--rotX) * -1)) rotateY(calc(var(--rotY) * -1)) rotateZ(var(--rotZ)) scale(0.85) translateZ(-20px);
       }
     }
     </style>
@@ -157,14 +157,14 @@ $animation3Duration = 13;
         <source src="<?php echo base_url("assets/images/base.mp4"); ?>" type="video/mp4">
       </video>
     </div>
-
+    
     <div class="overlay">
       <img src="<?php echo base_url("assets/images/overlay.png"); ?>" style="width:100%; height: 100%;">
     </div>
 
     <div class="fixed">
-        <!-- 20 Papers positioned in a balanced ring with unique 3D rotation angles (--rotX, --rotY, --rotZ) -->
-
+        <!-- 20 Papers positioned in a perimeter frame with 3D rotation and wide horizontal movement -->
+        
         <!-- Top Area -->
         <div class="paper-box" style="--top: 18%; --left: 35%; --rotX: 15deg; --rotY: 25deg; --rotZ: 14deg; --delay: 0s;">
           <div class="sheet"><img class="paper-image" src="" id="paper1"></div>
@@ -236,30 +236,3 @@ $animation3Duration = 13;
         </div>
     </div>
   </div>
-
-  <script type="text/javascript">
-    function checkStatus() {
-      $.getJSON("<?php echo(base_url("ajax/getAllTiles")); ?>", function (data) {
-        if(data){
-          let intMessageCnt = 1;
-          data.forEach(function(objItem){
-            if(intMessageCnt <= 20) {
-              let strURL = '<?php echo base_url("assets/images/uploads/"); ?>' + objItem.AtImage;
-              $("#paper" + intMessageCnt).attr("src", strURL);
-              intMessageCnt++;
-            }
-          });
-        }
-      });
-
-      setTimeout(function() {
-        checkStatus();
-      }, 10000);
-    }
-
-    $(document).ready(function() {
-      checkStatus();
-    });
-  </script>
-</body>
-</html>
