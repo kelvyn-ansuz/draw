@@ -236,3 +236,30 @@ $animation3Duration = 13;
         </div>
     </div>
   </div>
+
+  <script type="text/javascript">
+    function checkStatus() {
+      $.getJSON("<?php echo(base_url("ajax/getAllTiles")); ?>", function (data) {
+        if(data){
+          let intMessageCnt = 1;
+          data.forEach(function(objItem){
+            if(intMessageCnt <= 20) {
+              let strURL = '<?php echo base_url("assets/images/uploads/"); ?>' + objItem.AtImage;
+              $("#paper" + intMessageCnt).attr("src", strURL);
+              intMessageCnt++;
+            }
+          });
+        }
+      });
+
+      setTimeout(function() {
+        checkStatus();
+      }, 10000);
+    }
+
+    $(document).ready(function() {
+      checkStatus();
+    });
+  </script>
+</body>
+</html>
